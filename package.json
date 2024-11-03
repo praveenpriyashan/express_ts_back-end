@@ -4,8 +4,8 @@
   "main": "dist/main.js",
   "scripts": {
     "clean": "rm -rf dist",
-    "start": "tsc && nodemon --enable-source-maps dist/main.js",
     "compile": "tsc --watch",
+    "start": "tsc && nodemon --enable-source-maps dist/main.js",
     "build": "tsc",
     "cleanBuild": "rm -rf dist && tsc"
   },
