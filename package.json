@@ -1,0 +1,29 @@
+{
+  "name": "express_ts",
+  "version": "1.0.0",
+  "main": "dist/main.js",
+  "scripts": {
+    "clean": "rm -rf dist",
+    "start": "tsc && nodemon --enable-source-maps dist/main.js",
+    "compile": "tsc --watch",
+    "build": "tsc",
+    "cleanBuild": "rm -rf dist && tsc"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "description": "",
+  "dependencies": {
+    "dotenv": "^16.4.5",
+    "envalid": "^8.0.0",
+    "express": "^4.21.1",
+    "mongoose": "^8.8.0"
+  },
+  "devDependencies": {
+    "@types/express": "^5.0.0",
+    "@types/node": "^22.8.7",
+    "nodemon": "^3.1.7",
+    "typescript": "^5.6.3",
+    "typescript-eslint": "^8.12.2"
+  }
+}
