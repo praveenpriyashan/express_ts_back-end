@@ -5,5 +5,5 @@ const noteSchema = new Schema({
     text: {type: String},
 }, {timestamps: true});
 
-type Note=InferSchemaType<typeof noteSchema>;
-export default model<Note>("Note",noteSchema)
+type Note = InferSchemaType<typeof noteSchema>;
+export default model<Note>("Note", noteSchema)
