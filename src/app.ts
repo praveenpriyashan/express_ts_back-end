@@ -1,17 +1,18 @@
 import express, {NextFunction, Request, Response} from 'express'
 import "dotenv/config";
 import NoteRoutes from './routes/notes'
+import UserRoutes from './routes/user'
 import createHttpError, {isHttpError} from "http-errors";
 
 const app = express();
 
 app.use(express.json());
+app.use('/api/user', UserRoutes)   //middleware
 app.use('/api/notes', NoteRoutes)   //middleware
 
 app.use((req: Request, res: Response, next: NextFunction) => {
     next(createHttpError(404, "endpoint not found"));
 })
-
 
 const errr = (error: unknown, req: Request, res: Response, next: NextFunction) => {
     console.log(error)
