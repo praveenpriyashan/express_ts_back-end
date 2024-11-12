@@ -4,7 +4,18 @@ import UserModel from "../models/user"
 import bcrypt from 'bcrypt';
 
 
-
+export const getAuthenticatedUser:RequestHandler = async (req:Request,res:Response,next:NextFunction)=>{
+    const authenticatedUserId=req.session.userId
+    try{
+        if (!authenticatedUserId){
+            throw createHttpError(401, "user not authenticated");
+        }
+        const user=await UserModel.findById(authenticatedUserId).select("+email").exec()
+        res.status(201).json(user)
+    }catch (e) {
+        next(e)
+    }
+}
 
 
 export const signUp: RequestHandler = async (req: Request, res: Response, next: NextFunction) => {
