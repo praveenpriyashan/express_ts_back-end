@@ -4,15 +4,15 @@ import UserModel from "../models/user"
 import bcrypt from 'bcrypt';
 
 
-export const getAuthenticatedUser:RequestHandler = async (req:Request,res:Response,next:NextFunction)=>{
-    const authenticatedUserId=req.session.userId
-    try{
-        if (!authenticatedUserId){
+export const getAuthenticatedUser: RequestHandler = async (req: Request, res: Response, next: NextFunction) => {
+    const authenticatedUserId = req.session.userId
+    try {
+        if (!authenticatedUserId) {
             throw createHttpError(401, "user not authenticated");
         }
-        const user=await UserModel.findById(authenticatedUserId).select("+email").exec()
+        const user = await UserModel.findById(authenticatedUserId).select("+email").exec()
         res.status(201).json(user)
-    }catch (e) {
+    } catch (e) {
         next(e)
     }
 }
@@ -66,9 +66,19 @@ export const login: RequestHandler = async (req: Request, res: Response, next: N
         if (!passwordMatch) {
             throw createHttpError(401, "Invalid username or password")
         }
-        req.session.userId=user.id
-         res.status(201).json(user)
+        req.session.userId = user.id
+        res.status(201).json(user)
     } catch (e) {
         next(e)
     }
+}
+
+export const logout: RequestHandler = async (req: Request, res: Response, next: NextFunction) => {
+    req.session.destroy((error) => {
+        if (error) {
+            next(error)
+        } else {
+            res.status(200).json({message: "User logged out"})
+        }
+    })
 }
