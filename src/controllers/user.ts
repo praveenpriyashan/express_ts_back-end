@@ -3,7 +3,6 @@ import createHttpError from "http-errors";
 import UserModel from "../models/user"
 import bcrypt from 'bcrypt';
 
-
 export const getAuthenticatedUser: RequestHandler = async (req: Request, res: Response, next: NextFunction) => {
     const authenticatedUserId = req.session.userId
     try {
@@ -16,7 +15,6 @@ export const getAuthenticatedUser: RequestHandler = async (req: Request, res: Re
         next(e)
     }
 }
-
 
 export const signUp: RequestHandler = async (req: Request, res: Response, next: NextFunction) => {
     // in  this,we can get Password like this,  const {username, email,passwordRow} = req.body;
